@@ -26,11 +26,7 @@ endfunction
 
 augroup editorconfig
     autocmd!
-    autocmd BufNewFile * call s:SetTabstop('BufNewFile')
-    autocmd BufReadPost * call s:SetTabstop('BufReadPost')
     autocmd BufFilePost * call s:SetTabstop('BufFilePost')
-    autocmd VimEnter * call s:SetTabstop('VimEnter')
-    autocmd BufNew * call s:SetTabstop('BufNew')
 augroup END
 
 " vi: set ts=4 sts=4 sw=4 et ai:
