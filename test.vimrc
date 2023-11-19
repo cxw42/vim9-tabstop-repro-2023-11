@@ -5,9 +5,12 @@ set runtimepath+=fzf
 
 let g:REPRO=0
 
-function! s:SetTabstop() abort
+function! s:SetTabstop(which) abort
     let l:tabstop = 8
     let l:bufnr = str2nr(expand('<abuf>'))
+
+    echom a:which . ': l:bufnr ' . l:bufnr . ', curr ' . bufnr()
+
     if g:REPRO == 1
         " This causes the cursor position to change
         call setbufvar(l:bufnr, '&tabstop', l:tabstop)
@@ -19,8 +22,11 @@ endfunction
 
 augroup editorconfig
     autocmd!
-    autocmd BufNewFile,BufReadPost,BufFilePost * call s:SetTabstop()
-    autocmd VimEnter,BufNew * call s:SetTabstop()
+    autocmd BufNewFile * call s:SetTabstop('BufNewFile')
+    autocmd BufReadPost * call s:SetTabstop('BufReadPost')
+    autocmd BufFilePost * call s:SetTabstop('BufFilePost')
+    autocmd VimEnter * call s:SetTabstop('VimEnter')
+    autocmd BufNew * call s:SetTabstop('BufNew')
 augroup END
 
 " vi: set ts=4 sts=4 sw=4 et ai:
