@@ -26,3 +26,12 @@ Exactly as above, but `:let g:REPRO=2` instead of `1`.  This uses
 ### Observed
 
 The cursor stays on the `u` in line 1.
+
+## More information
+
+Say `:messages` to see a bit of debug info from the run.
+
+## Thoughts
+
+This seems to happen on BufFilePost --- maybe there's another issue
+similar to <https://github.com/vim/vim/issues/5820>?

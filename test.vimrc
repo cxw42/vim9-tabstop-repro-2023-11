@@ -10,6 +10,7 @@ function! s:SetTabstop(which) abort
     let l:bufnr = str2nr(expand('<abuf>'))
 
     echom a:which . ': l:bufnr ' . l:bufnr . ', curr ' . bufnr()
+        \ . '; repro ' . g:REPRO
     if l:bufnr != bufnr()
         echom "Skipping"
         return
