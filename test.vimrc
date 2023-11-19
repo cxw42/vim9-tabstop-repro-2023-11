@@ -5,14 +5,29 @@ set runtimepath+=fzf
 
 let g:REPRO=0
 
+function! s:PrintPosInWindowForBuf(bufnr) abort
+    try
+        let l:winnr = win_findbuf(a:bufnr)[0]
+        call win_execute(l:winnr, 'let s:pos = getcurpos()')
+        echom 'Current position in ' . a:bufnr . ' is ' . string(s:pos)
+    catch
+        echom 'No window for buffer ' . a:bufnr
+    endtry
+endfunction
+
 function! s:ApplyConfig(bufnr, config) abort
-    echom 'Current position in ' . a:bufnr . ' is ' . string(getpos(a:bufnr))
-    echom 'Current position in buf 1 is ' . string(getpos(1))
+    call s:PrintPosInWindowForBuf(a:bufnr)
+    call s:PrintPosInWindowForBuf(1)
     let l:tabstop = str2nr(a:config["tab_width"])
-    if g:REPRO
+    if g:REPRO == 1
         call setbufvar(a:bufnr, '&tabstop', l:tabstop)
-        echom 'Position in ' . a:bufnr . ' after setbufvar is ' . string(getpos(a:bufnr))
-        echom 'Position in buf 1 after setbufvar is ' . string(getpos(1))
+    elseif g:REPRO == 2
+        let &l:tabstop = l:tabstop
+    endif
+
+    if g:REPRO
+        call s:PrintPosInWindowForBuf(a:bufnr)
+        call s:PrintPosInWindowForBuf(1)
     endif
 endfunction
 
