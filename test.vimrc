@@ -10,6 +10,10 @@ function! s:SetTabstop(which) abort
     let l:bufnr = str2nr(expand('<abuf>'))
 
     echom a:which . ': l:bufnr ' . l:bufnr . ', curr ' . bufnr()
+    if l:bufnr != bufnr()
+        echom "Skipping"
+        return
+    endif
 
     if g:REPRO == 1
         " This causes the cursor position to change
