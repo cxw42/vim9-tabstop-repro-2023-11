@@ -23,6 +23,8 @@ function! s:SetTabstop(which) abort
     elseif g:REPRO == 2
         " This does not cause the cursor position to change
         let &l:tabstop = l:tabstop
+    elseif g:REPRO == 3
+        eval 'setlocal tabstop=' . l:tabstop
     endif
 endfunction
 
