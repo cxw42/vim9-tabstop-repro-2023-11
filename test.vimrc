@@ -17,6 +17,12 @@ function! s:SetTabstop(which) abort
         return
     endif
 
+    " skip this event for terminal buffers, e.g., :FZF
+    if bufname(l:abuf) =~ '^!\w*sh$'
+        echom "Skipping - in a shell buffer"
+        return
+    endif
+
     if g:REPRO == 1
         " This causes the cursor position to change
         call setbufvar(l:abuf, '&tabstop', l:tabstop)

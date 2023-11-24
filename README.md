@@ -1,5 +1,7 @@
 # Repro
 
+**Note:** To repro, revert the "Add the fix" commit.
+
 ## Test conditions
 
 Ubuntu 20.04.6 LTS, `x86_64`
