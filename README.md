@@ -2,6 +2,8 @@
 
 **Note:** To repro, revert the "Add the fix" commit.
 
+Testing with FZF and EditorConfig: `make fzf-ec`
+
 ## Test conditions
 
 Ubuntu 20.04.6 LTS, `x86_64`
