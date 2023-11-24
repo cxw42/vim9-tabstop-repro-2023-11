@@ -7,18 +7,19 @@ let g:REPRO=0
 
 function! s:SetTabstop(which) abort
     let l:tabstop = 8
-    let l:bufnr = str2nr(expand('<abuf>'))
+    let l:abuf = str2nr(expand('<abuf>'))
 
-    echom a:which . ': l:bufnr ' . l:bufnr . ', curr ' . bufnr()
+    echom a:which . ': l:abuf ' . l:abuf . ', curr ' . bufnr()
         \ . '; repro ' . g:REPRO
-    if l:bufnr != bufnr()
-        echom "Skipping"
+        \ . '; bufname ' . bufname()
+    if l:abuf != bufnr()
+        echom "Skipping - abuf != bufnr"
         return
     endif
 
     if g:REPRO == 1
         " This causes the cursor position to change
-        call setbufvar(l:bufnr, '&tabstop', l:tabstop)
+        call setbufvar(l:abuf, '&tabstop', l:tabstop)
     elseif g:REPRO == 2
         " This does not cause the cursor position to change
         let &l:tabstop = l:tabstop
